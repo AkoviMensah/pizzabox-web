@@ -1,5 +1,9 @@
+import { Container } from 'react-bootstrap';
+import { Route, Routes } from 'react-router-dom';
 import Footer from './app/layout/Footer';
 import Header from './app/layout/Header';
+import AboutPage from './pages/about/AboutPage';
+import ContactPage from './pages/contact/ContactPage';
 import Pizzas from './pages/pizzas/Pizzas';
 
 function App() {
@@ -7,8 +11,13 @@ function App() {
     <div>
       <Header />
       <main>
-        <h1> Pizzas </h1>
-        <Pizzas />
+        <Container>
+          <Routes>
+            <Route path='/' element={<Pizzas />} />
+            <Route path='/about' element={<AboutPage />} />
+            <Route path='/contact' element={<ContactPage />} />
+          </Routes>
+        </Container>
       </main>
       <Footer />
     </div>

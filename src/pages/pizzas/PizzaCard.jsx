@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap'
 
-const Pizza = ({ product }) => {
+const PizzaCard = ({ product }) => {
     return (
         <Card className='my-3 p-3 rounded'>
             <a href="google.com">
@@ -13,4 +13,4 @@ const Pizza = ({ product }) => {
     )
 }
 
-export default Pizza
+export default PizzaCard

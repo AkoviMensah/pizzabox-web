@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import Pizza from './Pizza'
+import { Col, Row } from 'react-bootstrap'
+import PizzaCard from './PizzaCard'
 
 const Pizzas = (props) => {
     const [products, setProducts] = useState([])
@@ -12,16 +12,15 @@ const Pizzas = (props) => {
             .then(data => setProducts(data))
     }, [])
     return (
-        <Container>
-            <Row>
-                {
-                    products.map((product, index) => (
-                        <Col>
-                            <Pizza key={index} product={product} /></Col>
-                    ))
-                }
-            </Row>
-        </Container>
+
+        <Row>
+            {
+                products.map((product, index) => (
+                    <Col>
+                        <PizzaCard key={index} product={product} /></Col>
+                ))
+            }
+        </Row>
     )
 }
 
