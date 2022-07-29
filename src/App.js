@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from './app/layout/Footer';
 import Header from './app/layout/Header';
 import AboutPage from './pages/about/AboutPage';
+import Login from './pages/account/Login';
 import ContactPage from './pages/contact/ContactPage';
 import Pizzas from './pages/pizzas/Pizzas';
 
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<Pizzas />} />
             <Route path='/about' element={<AboutPage />} />
             <Route path='/contact' element={<ContactPage />} />
+            <Route path='/login' element={<Login />} />
           </Routes>
         </Container>
       </main>
