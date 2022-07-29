@@ -1,11 +1,15 @@
 import Footer from './app/layout/Footer';
 import Header from './app/layout/Header';
+import Pizzas from './pages/pizzas/Pizzas';
 
 function App() {
   return (
     <div>
       <Header />
-      <h1> Main </h1>
+      <main>
+        <h1> Pizzas </h1>
+        <Pizzas />
+      </main>
       <Footer />
     </div>
   );
