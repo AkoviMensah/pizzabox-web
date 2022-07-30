@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap'
 
-const PizzaCard = ({ product }) => {
+const PizzaCard = ({ pizza }) => {
     return (
         <Card className='my-3 p-3 rounded'>
-            <a href="google.com">
-                <Card.Img variant="top" src={product.pictureUrl} />
+            <a href="##">
+                <Card.Img variant="top" src={pizza.pictureUrl} />
             </a>
-            <h6>{product.name + "  " + product.price} </h6>
+            <h6>{pizza.name + "  " + pizza.price} </h6>
             <Button>Add to card</Button>
         </Card>
     )
