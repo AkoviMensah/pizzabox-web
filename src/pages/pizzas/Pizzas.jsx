@@ -1,27 +1,26 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import Pizza from './Pizza'
+import { Col, Row } from 'react-bootstrap'
+import agent from '../../app/api/agent'
+import PizzaCard from './PizzaCard'
 
 const Pizzas = (props) => {
-    const [products, setProducts] = useState([])
+    const [pizzas, setPizzas] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/pizzas')
-            .then(response => response.json())
-            .then(data => setProducts(data))
+        agent.Store.list().then(pizzas => setPizzas(pizzas))
     }, [])
     return (
-        <Container>
-            <Row>
-                {
-                    products.map((product, index) => (
-                        <Col>
-                            <Pizza key={index} product={product} /></Col>
-                    ))
-                }
-            </Row>
-        </Container>
+
+        <Row>
+            {
+                pizzas.map((pizza) => (
+                    <Col key={pizza.id} sm={12} md={6} lg={4} xl={3}>
+                        <PizzaCard pizza={pizza} />
+                    </Col>
+                ))
+            }
+        </Row>
     )
 }
 
