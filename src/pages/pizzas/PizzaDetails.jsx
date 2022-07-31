@@ -24,16 +24,23 @@ const PizzaDetails = () => {
             <Col md={6}>
                 <Image className='p-3' src={pizza.pictureUrl} alt={pizza.name} fluid />
             </Col>
-            <Col md={3}>
+            <Col md={3} className='p-3 m-2'>
                 <ListGroup.Item>
-                    <h2>{pizza.name}</h2>
+                    <h1>{pizza.name}</h1>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                    <p>{pizza.description}</p>
+                    <h3> Type: {pizza.type}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                    <h1>{id}</h1>
+                    <h3> Crust: {pizza.crust}</h3>
                 </ListGroup.Item>
+                <ListGroup.Item>
+                    <h3>Price: {pizza.price}</h3>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <p> Description: {pizza.description}</p>
+                </ListGroup.Item>
+
             </Col>
         </Row>
     )

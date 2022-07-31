@@ -6,15 +6,16 @@ const Header = () => {
         <header>
             <Navbar bg="primary" variant="dark">
                 <Container>
-                    <Navbar.Brand href="#home">PizzaBox</Navbar.Brand>
+                    <Navbar.Brand href="/">PizzaBox</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <Nav.Link href="/contact">Contact</Nav.Link>
                     </Nav>
                     <Nav className="ml-auto">
-                        <Nav.Link href="#home"><i className='fas fa-shopping-cart'> Cart</i></Nav.Link>
-                        <Nav.Link href="#features"><i className='fas fa-user'> Login</i></Nav.Link>
+                        <Nav.Link href="/cart"><i className='fas fa-shopping-cart'> Cart</i></Nav.Link>
+                        <Nav.Link href="/login"><i className='fas fa-user'> Login</i></Nav.Link>
+                        <Nav.Link href="/register"><i className='fas fa-user'> Register</i></Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
