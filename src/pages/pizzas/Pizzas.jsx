@@ -14,9 +14,10 @@ const Pizzas = (props) => {
 
         <Row>
             {
-                pizzas.map((pizza, index) => (
-                    <Col>
-                        <PizzaCard key={index} pizza={pizza} /></Col>
+                pizzas.map((pizza) => (
+                    <Col key={pizza.id} sm={12} md={6} lg={4} xl={3}>
+                        <PizzaCard pizza={pizza} />
+                    </Col>
                 ))
             }
         </Row>
