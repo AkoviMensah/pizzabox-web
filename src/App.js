@@ -13,6 +13,7 @@ import { useStoreContext } from './app/context/StoreContext';
 import { useEffect, useState } from 'react';
 import { getCookie } from './app/util/util';
 import agent from './app/api/agent';
+import CheckoutPage from './pages/checkout/CheckoutPage';
 
 function App() {
   const { setBasket } = useStoreContext();
@@ -45,6 +46,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/basket' element={<BasketPage />} />
+            <Route path='/checkout' element={<CheckoutPage />} />
           </Routes>
         </Container>
       </main>
