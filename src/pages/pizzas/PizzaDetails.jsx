@@ -1,30 +1,28 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import agent from '../../app/api/agent'
 import { useParams } from 'react-router-dom'
 import { Divider, Grid, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { addBasketItemAsync, removeBasketItemAsync } from '../basket/basketSlice'
+import { fetchPizzaAsync, pizzaSelectors } from './storeSlice'
 
 const PizzaDetails = () => {
 
     const { basket, status } = useSelector(state => state.basket);
+    const { status: pizzaStatus } = useSelector(state => state.store)
     const dispatch = useDispatch();
     const { id } = useParams();
-    const [pizza, setPizza] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const pizza = useSelector(state => pizzaSelectors.selectById(state, id))
+
     const [quantity, setQuantity] = useState(0);
     const item = basket?.items.find(i => i.pizzaId === pizza?.id);
 
     useEffect(() => {
         if (item) setQuantity(item.quantity);
-        agent.Store.details(parseInt(id))
-            .then(response => setPizza(response))
-            .catch(error => console.log(error))
-            .finally(() => setLoading(false))
-    }, [id, item]);
+        if (!pizza) dispatch(fetchPizzaAsync(parseInt(id)))
+    }, [id, item, dispatch, pizza]);
 
     function handleInputChange(event) {
         if (event.target.value > 0) {
@@ -43,7 +41,7 @@ const PizzaDetails = () => {
         }
     }
 
-    if (loading) return <h1>Loading pizza...</h1>
+    if (pizzaStatus.includes('pending')) return <h1>Loading pizza...</h1>
 
     if (!pizza) return <h1>Not found</h1>
 
@@ -96,7 +94,7 @@ const PizzaDetails = () => {
                     <Grid item xs={6}>
                         <LoadingButton
                             disabled={item?.quantity === quantity}
-                            loading={status.includes('pendingRemoveItem' + item?.pizzaId)}
+                            loading={status.includes('pending')}
                             onClick={handleUpdateCart}
                             sx={{ height: '55px' }}
                             color='primary'
