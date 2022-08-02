@@ -12,7 +12,7 @@ const Pizzas = (props) => {
     }, [])
     return (
 
-        <Row>
+        <Row className='m-1'>
             {
                 pizzas.map((pizza) => (
                     <Col key={pizza.id} sm={12} md={6} lg={4} xl={3}>
