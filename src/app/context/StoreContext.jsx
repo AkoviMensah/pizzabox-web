@@ -16,7 +16,7 @@ export function StoreProvider({ children }) {
 
     function removeItem(pizzaId, quantity) {
         if (!basket) return;
-        const items = [...basket.tems];
+        const items = [...basket.items];
         const itemIndex = items.findIndex(i => i.pizzaId === pizzaId)
         if (itemIndex >= 0) {
             items[itemIndex].quantity -= quantity;
