@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import agent from '../../app/api/agent'
+import { useStoreContext } from '../../app/context/StoreContext'
 
 const PizzaCard = ({ pizza }) => {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const { setBasket } = useStoreContext();
 
     function handleAddItem(pizzaId) {
         setLoading(true)
         agent.Basket.addItem(pizzaId)
+            .then(basket => setBasket(basket))
             .catch(error => console.log(error))
             .finally(() => setLoading(false))
     }

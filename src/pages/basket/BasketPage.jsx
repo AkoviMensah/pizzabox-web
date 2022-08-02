@@ -1,9 +1,9 @@
 import React from 'react'
-import { Container, Table } from 'react-bootstrap'
+import { Card, Container, Table } from 'react-bootstrap'
 import { useStoreContext } from '../../app/context/StoreContext'
 
 const BasketPage = () => {
-    const { basket } = useStoreContext()
+    const { basket } = useStoreContext();
 
     if (!basket) return <h1> Your basket is empty </h1>
 
@@ -20,7 +20,11 @@ const BasketPage = () => {
                     </tr>
                     {basket.items.map(item => (
                         <tr key={item.pizzaId}>
-                            <td>{item.name}</td>
+                            <Card display='flex'>
+                                <img src={item.pictureUrl} alt={item.name} style={{ height: 50, width: 100, marginRight: 200 }} />
+                                <span>{item.name}</span>
+                            </Card>
+
                             <td align='right'>${(item.price / 100).toFixed(2)}</td>
                             <td align='right'>{item.quantity}</td>
                             <td align='right'>${((item.price / 100) * item.quantity).toFixed(2)}</td>
