@@ -1,23 +1,14 @@
 import { LoadingButton } from '@mui/lab'
 import { CardActions, CardContent, CardMedia } from '@mui/material'
-import React, { useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import agent from '../../app/api/agent'
-import { useStoreContext } from '../../app/context/StoreContext'
 import { currencyFormat } from '../../app/util/util'
+import { addBasketItemAsync } from '../basket/basketSlice'
 
 const PizzaCard = ({ pizza }) => {
-    const [loading, setLoading] = useState(false);
-    const { setBasket } = useStoreContext();
-
-    function handleAddItem(pizzaId) {
-        setLoading(true);
-        agent.Basket.addItem(pizzaId)
-            .then(basket => setBasket(basket))
-            .catch(error => console.log(error))
-            .finally(() => setLoading(false));
-    }
+    const { status } = useSelector(state => state.basket)
+    const dispatch = useDispatch();
 
     return (
         <Card className='m-1'>
@@ -36,8 +27,8 @@ const PizzaCard = ({ pizza }) => {
             </CardContent>
             <CardActions>
                 <LoadingButton color="secondary"
-                    loading={loading}
-                    onClick={() => handleAddItem(pizza.id)}
+                    loading={status.includes('pendingAddItem' + pizza.id)}
+                    onClick={() => dispatch(addBasketItemAsync({ pizzaId: pizza.id }))}
                     size="small">
                     Add to cart
                 </LoadingButton>

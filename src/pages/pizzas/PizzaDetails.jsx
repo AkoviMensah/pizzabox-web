@@ -4,17 +4,18 @@ import agent from '../../app/api/agent'
 import { useParams } from 'react-router-dom'
 import { Divider, Grid, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
-import { useStoreContext } from '../../app/context/StoreContext'
 import { Table } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { addBasketItemAsync, removeBasketItemAsync } from '../basket/basketSlice'
 
 const PizzaDetails = () => {
 
-    const { basket, setBasket, removeItem } = useStoreContext();
+    const { basket, status } = useSelector(state => state.basket);
+    const dispatch = useDispatch();
     const { id } = useParams();
     const [pizza, setPizza] = useState(null);
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(0);
-    const [submitting, setSubmitting] = useState(false);
     const item = basket?.items.find(i => i.pizzaId === pizza?.id);
 
     useEffect(() => {
@@ -32,19 +33,13 @@ const PizzaDetails = () => {
     }
 
     function handleUpdateCart() {
-        setSubmitting(true);
+
         if (!item || quantity > item.quantity) {
             const updatedQuantity = item ? quantity - item.quantity : quantity;
-            agent.Basket.addItem(pizza?.id, updatedQuantity)
-                .then(basket => setBasket(basket))
-                .catch(error => console.log(error))
-                .finally(() => setSubmitting(false));
+            dispatch(addBasketItemAsync({ pizzaId: pizza?.id, quantity: updatedQuantity }))
         } else {
             const updatedQuantity = item.quantity - quantity;
-            agent.Basket.removeItem(pizza?.id, updatedQuantity)
-                .then(() => removeItem(pizza?.id, updatedQuantity))
-                .catch(error => console.log(error))
-                .finally(() => setSubmitting(false));
+            dispatch(removeBasketItemAsync({ pizzaId: pizza?.id, quantity: updatedQuantity }))
         }
     }
 
@@ -101,7 +96,7 @@ const PizzaDetails = () => {
                     <Grid item xs={6}>
                         <LoadingButton
                             disabled={item?.quantity === quantity}
-                            loading={submitting}
+                            loading={status.includes('pendingRemoveItem' + item?.pizzaId)}
                             onClick={handleUpdateCart}
                             sx={{ height: '55px' }}
                             color='primary'

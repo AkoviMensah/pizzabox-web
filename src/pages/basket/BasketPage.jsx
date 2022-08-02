@@ -1,35 +1,16 @@
 import { Add, Delete, Remove } from '@mui/icons-material';
-import React, { useState } from 'react'
-import { useStoreContext } from '../../app/context/StoreContext'
-import agent from '../../app/api/agent'
+import React from 'react';
 import { LoadingButton } from '@mui/lab';
 import BasketSummary from './BasketSummary';
 import { Box, Grid, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Button, Table } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBasketItemAsync, removeBasketItemAsync } from './basketSlice';
 
 const BasketPage = () => {
-    const { basket, setBasket, removeItem } = useStoreContext();
-    const [status, setStatus] = useState({
-        loading: false,
-        name: ''
-    });
-
-    function handleAddItem(pizzaId, name) {
-        setStatus({ loading: true, name });
-        agent.Basket.addItem(pizzaId)
-            .then(basket => setBasket(basket))
-            .catch(error => console.log(error))
-            .finally(() => setStatus({ loading: false, name: '' }))
-    }
-
-    function handleRemoveItem(pizzaId, quantity = 1, name) {
-        setStatus({ loading: true, name });
-        agent.Basket.removeItem(pizzaId, quantity)
-            .then(() => removeItem(pizzaId, quantity))
-            .catch(error => console.log(error))
-            .finally(() => setStatus({ loading: false, name: '' }));
-    }
+    const { basket, status } = useSelector(state => state.basket);
+    const dispatch = useDispatch();
 
     if (!basket) return <Typography variant='h3'>Your basket is empty</Typography>
 
@@ -61,16 +42,16 @@ const BasketPage = () => {
                                 <TableCell align="right">${(item.price / 100).toFixed(2)}</TableCell>
                                 <TableCell align="center">
                                     <LoadingButton
-                                        loading={status.loading && status.name === 'rem' + item.pizzaId}
-                                        onClick={() => handleRemoveItem(item.pizzaId, 1, 'rem' + item.pizzaId)}
+                                        loading={status === 'pendingRemoveItem' + item.pizzaId + 'rem'}
+                                        onClick={() => dispatch(removeBasketItemAsync({ pizzaId: item.pizzaId, quantity: 1, name: 'rem' }))}
                                         color='error'
                                     >
                                         <Remove />
                                     </LoadingButton>
                                     {item.quantity}
                                     <LoadingButton
-                                        loading={status.loading && status.name === 'add' + item.pizzaId}
-                                        onClick={() => handleAddItem(item.pizzaId, 'add' + item.pizzaId)}
+                                        loading={status === 'pendingAddItem' + item.pizzaId}
+                                        onClick={() => dispatch(addBasketItemAsync({ pizzaId: item.pizzaId }))}
                                         color='secondary'
                                     >
                                         <Add />
@@ -79,8 +60,8 @@ const BasketPage = () => {
                                 <TableCell align="right">${((item.price / 100) * item.quantity).toFixed(2)}</TableCell>
                                 <TableCell align="right">
                                     <LoadingButton
-                                        loading={status.loading && status.name === 'del' + item.pizzaId}
-                                        onClick={() => handleRemoveItem(item.pizzaId, item.quantity, 'del' + item.pizzaId)}
+                                        loading={status === 'pendingRemoveItem' + item.pizzaId + 'del'}
+                                        onClick={() => dispatch(removeBasketItemAsync({ pizzaId: item.pizzaId, quantity: item.quantity, name: 'del' }))}
                                         color='error'
                                     >
                                         <Delete />

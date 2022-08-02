@@ -5,7 +5,8 @@ import './style.css';
 import './bootstrap.min.css';
 import { createBrowserHistory } from 'history';
 import { BrowserRouter } from 'react-router-dom';
-import { StoreProvider } from './app/context/StoreContext';
+import { store } from './app/store/configureStore';
+import { Provider } from 'react-redux';
 
 export const history = createBrowserHistory();
 
@@ -14,9 +15,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter history={history}>
-      <StoreProvider>
+      <Provider store={store}>
         <App />
-      </StoreProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

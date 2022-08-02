@@ -9,27 +9,28 @@ import BasketPage from './pages/basket/BasketPage';
 import ContactPage from './pages/contact/ContactPage';
 import PizzaDetails from './pages/pizzas/PizzaDetails';
 import Pizzas from './pages/pizzas/Pizzas';
-import { useStoreContext } from './app/context/StoreContext';
 import { useEffect, useState } from 'react';
 import { getCookie } from './app/util/util';
 import agent from './app/api/agent';
 import CheckoutPage from './pages/checkout/CheckoutPage';
+import { useDispatch } from 'react-redux';
+import { setBasket } from './pages/basket/basketSlice';
 
 function App() {
-  const { setBasket } = useStoreContext();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const buyerId = getCookie('buyerId');
     if (buyerId) {
       agent.Basket.get()
-        .then((basket) => setBasket(basket))
+        .then((basket) => dispatch(setBasket(basket)))
         .catch((error) => console.log(error))
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
     }
-  }, [setBasket]);
+  }, [dispatch]);
 
   if (loading) return <h1>loading ...</h1>;
 
