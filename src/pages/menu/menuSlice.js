@@ -8,10 +8,10 @@ import agent from '../../app/api/agent';
 const pizzasAdapter = createEntityAdapter();
 
 export const fetchPizzasAsync = createAsyncThunk(
-  'store/fetchPizzasAsync',
+  'menu/fetchPizzasAsync',
   async (_, thunkAPI) => {
     try {
-      return await agent.Store.list();
+      return await agent.Menu.list();
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.data });
     }
@@ -19,18 +19,18 @@ export const fetchPizzasAsync = createAsyncThunk(
 );
 
 export const fetchPizzaAsync = createAsyncThunk(
-  'store/fetchPizzaAsync',
+  'menu/fetchPizzaAsync',
   async (pizzaId, thunkAPI) => {
     try {
-      return await agent.Store.details(pizzaId);
+      return await agent.Menu.details(pizzaId);
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.data });
     }
   }
 );
 
-export const storeSlice = createSlice({
-  name: 'store',
+export const menuSlice = createSlice({
+  name: 'menu',
   initialState: pizzasAdapter.getInitialState({
     pizzasLoaded: false,
     status: 'idle',
@@ -63,6 +63,4 @@ export const storeSlice = createSlice({
   },
 });
 
-export const pizzaSelectors = pizzasAdapter.getSelectors(
-  (state) => state.store
-);
+export const pizzaSelectors = pizzasAdapter.getSelectors((state) => state.menu);

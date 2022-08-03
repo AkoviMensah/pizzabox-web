@@ -6,12 +6,12 @@ import { LoadingButton } from '@mui/lab'
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { addBasketItemAsync, removeBasketItemAsync } from '../basket/basketSlice'
-import { fetchPizzaAsync, pizzaSelectors } from './storeSlice'
+import { fetchPizzaAsync, pizzaSelectors } from './menuSlice'
 
 const PizzaDetails = () => {
 
     const { basket, status } = useSelector(state => state.basket);
-    const { status: pizzaStatus } = useSelector(state => state.store)
+    const { status: pizzaStatus } = useSelector(state => state.menu)
     const dispatch = useDispatch();
     const { id } = useParams();
     const pizza = useSelector(state => pizzaSelectors.selectById(state, id))
