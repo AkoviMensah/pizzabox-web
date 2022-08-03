@@ -1,25 +1,28 @@
 import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
+    const { basket } = useSelector(state => state.basket)
+    const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0)
     return (
         <header>
             <Navbar bg="primary" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">PizzaBox</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="/contact">Contact</Nav.Link>
+                        <Link className='pe-1' to="/"><i className='fas'>Home</i></Link>
+                        <Link className='pe-1' to="/contact"><i className='fas'>Contact</i></Link>
                     </Nav>
                     <Nav className="ml-auto">
-                        <Nav.Link href="/cart"><i className='fas fa-shopping-cart'> Cart</i></Nav.Link>
-                        <Nav.Link href="/login"><i className='fas fa-user'> Login</i></Nav.Link>
-                        <Nav.Link href="/register"><i className='fas fa-user'> Register</i></Nav.Link>
+                        <Link className='pe-1' to='/basket'><i className='fas fa-shopping-cart'> Cart ({itemCount}) </i> </Link>
+                        <Link className='pe-1' to="/login"><i className='fas fa-user'> Login </i> </Link>
+                        <Link to="/register"><i className='fas fa-user'> Register</i></Link>
                     </Nav>
                 </Container>
             </Navbar>
-        </header>
+        </header >
     )
 }
 

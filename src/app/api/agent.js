@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
+axios.defaults.withCredentials = true;
 
 const responseBody = (response) => response.data;
 
@@ -13,11 +14,20 @@ const requests = {
 
 const Store = {
   list: () => requests.get('pizzas'),
-  details: (id) => requests.get(`pizzas/${id}`)
+  details: (id) => requests.get(`pizzas/${id}`),
+};
+
+const Basket = {
+  get: () => requests.get('Basket'),
+  addItem: (pizzaId, quantity = 1) =>
+    requests.post(`Basket?pizzaId=${pizzaId}&quantity=${quantity}`, {}),
+  removeItem: (pizzaId, quantity = 1) =>
+    requests.delete(`Basket?pizzaId=${pizzaId}&quantity=${quantity}`),
 };
 
 const agent = {
   Store,
+  Basket,
 };
 
 export default agent;
