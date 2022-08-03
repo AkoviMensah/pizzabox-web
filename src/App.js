@@ -14,7 +14,7 @@ import agent from './app/api/agent';
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import { useDispatch } from 'react-redux';
 import { setBasket } from './pages/basket/basketSlice';
-import Store from './pages/menu/Menu';
+import Menu from './pages/menu/Menu';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ function App() {
       <main>
         <Container>
           <Routes>
-            <Route path='/' element={<Store />} />
+            <Route path='/' element={<Menu />} />
             <Route path='/pizza/:id' element={<PizzaDetails />} />
             <Route path='/about' element={<AboutPage />} />
             <Route path='/contact' element={<ContactPage />} />
