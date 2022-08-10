@@ -75,9 +75,16 @@ const Basket = {
     requests.delete(`Basket?pizzaId=${pizzaId}&quantity=${quantity}`),
 };
 
+const Account = {
+  login: (values) => requests.post('account/login', values),
+  register: (values) => requests.post('account/register', values),
+  currentUser: () => requests.get('account/currentUser'),
+};
+
 const agent = {
   Menu,
   Basket,
+  Account,
 };
 
 export default agent;

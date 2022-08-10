@@ -3,6 +3,7 @@ import { AppBar, Badge, Box, IconButton, List, ListItem, Toolbar, Typography } f
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
+import SignedInMenu from './SignedInMenu'
 
 const midLinks = [
     { title: 'pizzas', path: '/' },
@@ -29,6 +30,7 @@ const navStyles = {
 
 const Header = () => {
     const { basket } = useSelector(state => state.basket);
+    const { user } = useSelector(state => state.account);
     const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0)
 
     return (
@@ -58,18 +60,23 @@ const Header = () => {
                             <ShoppingCart />
                         </Badge>
                     </IconButton>
-                    <List sx={{ display: 'flex' }}>
-                        {rightLinks.map(({ title, path }) => (
-                            <ListItem
-                                component={NavLink}
-                                to={path}
-                                key={path}
-                                sx={navStyles}
-                            >
-                                {title.toUpperCase()}
-                            </ListItem>
-                        ))}
-                    </List>
+                    {user ? (
+                        <SignedInMenu />
+                    ) : (
+                        <List sx={{ display: 'flex' }}>
+                            {rightLinks.map(({ title, path }) => (
+                                <ListItem
+                                    component={NavLink}
+                                    to={path}
+                                    key={path}
+                                    sx={navStyles}
+                                >
+                                    {title.toUpperCase()}
+                                </ListItem>
+                            ))}
+                        </List>
+                    )}
+
                 </Box>
             </Toolbar>
         </AppBar>
