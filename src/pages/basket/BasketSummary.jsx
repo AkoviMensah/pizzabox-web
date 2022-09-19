@@ -1,12 +1,11 @@
-import { Paper, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
-import React from 'react'
-import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { currencyFormat } from '../../app/util/util';
+import { TableContainer, Paper, Table, TableBody, TableRow, TableCell } from "@mui/material";
+import { useSelector } from "react-redux";
+import { currencyFormat } from "../../app/util/util";
 
-const BasketSummary = () => {
+export default function BasketSummary({ subtotal }) {
     const { basket } = useSelector(state => state.basket);
-    const subtotal = basket?.items.reduce((sum, item) => sum + (item.quantity * item.price), 0) ?? 0;
+    if (subtotal === undefined)
+        subtotal = basket?.items.reduce((sum, item) => sum + (item.quantity * item.price), 0) ?? 0;
     const deliveryFee = subtotal > 10000 ? 0 : 500;
 
     return (
@@ -37,5 +36,3 @@ const BasketSummary = () => {
         </>
     )
 }
-
-export default BasketSummary
