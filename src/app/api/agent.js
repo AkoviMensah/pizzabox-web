@@ -10,6 +10,15 @@ const sleep = () => new Promise((resolve) => setTimeout(resolve, 500));
 
 const responseBody = (response) => response.data;
 
+if (localStorage.getItem('user')) {
+  axios.interceptors.request.use((config) => {
+    const token = JSON.parse(localStorage.getItem('user')).token;
+    console.log(token);
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+}
+
 axios.interceptors.response.use(
   async (response) => {
     await sleep();

@@ -22,8 +22,11 @@ function App() {
 
   const initApp = useCallback(async () => {
     try {
-      await dispatch(fetchCurrentUser());
-      await dispatch(fetchBasketAsync());
+      if (localStorage.getItem('user')) {
+        await dispatch(fetchCurrentUser());
+      } else {
+        await dispatch(fetchBasketAsync());
+      }
     } catch (error) {
       console.log(error);
     }
@@ -36,25 +39,25 @@ function App() {
   if (loading) return <h1>loading ...</h1>;
 
   return (
-    <div>
+    <>
       <Header />
-      <main>
-        <Container>
-          <Routes>
-            <Route path='/' element={<Menu />} />
-            <Route path='/pizza/:id' element={<PizzaDetails />} />
-            <Route path='/about' element={<AboutPage />} />
-            <Route path='/contact' element={<ContactPage />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/basket' element={<BasketPage />} />
-            <Route path='/checkout' element={<CheckoutPage />} />
-            <Route path='/orders' element={<Orders />} />
-          </Routes>
-        </Container>
-      </main>
+
+      <Container>
+        <Routes>
+          <Route path='/' element={<Menu />} />
+          <Route path='/pizza/:id' element={<PizzaDetails />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/contact' element={<ContactPage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/basket' element={<BasketPage />} />
+          <Route path='/checkout' element={<CheckoutPage />} />
+          <Route path='/orders' element={<Orders />} />
+        </Routes>
+      </Container>
+
       <Footer />
-    </div>
+    </>
   );
 }
 
