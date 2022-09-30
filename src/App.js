@@ -22,11 +22,8 @@ function App() {
 
   const initApp = useCallback(async () => {
     try {
-      if (localStorage.getItem('user')) {
-        await dispatch(fetchCurrentUser());
-      } else {
-        await dispatch(fetchBasketAsync());
-      }
+      await dispatch(fetchCurrentUser());
+      await dispatch(fetchBasketAsync());
     } catch (error) {
       console.log(error);
     }

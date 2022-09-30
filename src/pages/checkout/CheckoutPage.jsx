@@ -10,6 +10,7 @@ import agent from "../../app/api/agent";
 import { clearBasket } from "../basket/basketSlice";
 import { LoadingButton } from "@mui/lab";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const steps = ['Shipping address', 'Review your order', 'Payment details'];
 
@@ -40,6 +41,13 @@ export default function CheckoutPage() {
     });
 
     useEffect(() => {
+        if (localStorage.getItem('user')) {
+            axios.interceptors.request.use((config) => {
+                const token = JSON.parse(localStorage.getItem('user')).token;
+                if (token) config.headers.Authorization = `Bearer ${token}`;
+                return config;
+            });
+        }
         agent.Account.fetchAddress()
             .then(response => {
                 if (response) {
