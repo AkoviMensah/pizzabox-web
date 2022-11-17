@@ -2,9 +2,8 @@ import { Add, Delete, Remove } from '@mui/icons-material';
 import React from 'react';
 import { LoadingButton } from '@mui/lab';
 import BasketSummary from './BasketSummary';
-import { Box, Grid, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBasketItemAsync, removeBasketItemAsync } from './basketSlice';
 

@@ -12,7 +12,7 @@ const requests = {
   delete: (url) => axios.delete(url).then(responseBody),
 };
 
-const Store = {
+const Menu = {
   list: () => requests.get('pizzas'),
   details: (id) => requests.get(`pizzas/${id}`),
 };
@@ -26,7 +26,7 @@ const Basket = {
 };
 
 const agent = {
-  Store,
+  Menu,
   Basket,
 };
 
