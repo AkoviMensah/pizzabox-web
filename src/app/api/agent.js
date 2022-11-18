@@ -25,9 +25,14 @@ const Basket = {
     requests.delete(`Basket?pizzaId=${pizzaId}&quantity=${quantity}`),
 };
 
+const Account = {
+  getUser: (token) => requests.get(`account/currentUser`),
+};
+
 const agent = {
   Menu,
   Basket,
+  Account,
 };
 
 export default agent;
