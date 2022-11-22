@@ -26,7 +26,9 @@ const Basket = {
 };
 
 const Account = {
-  getUser: (token) => requests.get(`account/currentUser`),
+  login: (values) => requests.post('account/login', values),
+  register: (values) => requests.post('account/register', values),
+  currentUser: () => requests.get('account/currentUser'),
 };
 
 const agent = {
