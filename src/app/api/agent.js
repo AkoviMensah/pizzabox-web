@@ -1,9 +1,18 @@
 import axios from 'axios';
+//import { store } from "../store/configureStore"
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 axios.defaults.withCredentials = true;
 
 const responseBody = (response) => response.data;
+const user = localStorage.getItem('user');
+if (user) {
+  axios.interceptors.request.use((config) => {
+    const token = user.token;
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+}
 
 const requests = {
   get: (url) => axios.get(url).then(responseBody),
