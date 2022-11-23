@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
+    const { user } = useSelector(state => state.account);
     const { basket } = useSelector(state => state.basket)
     const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0)
     return (
@@ -16,9 +17,15 @@ const Header = () => {
                         <Link className='pe-1' to="/contact"><i className='fas'>Contact</i></Link>
                     </Nav>
                     <Nav className="ml-auto">
-                        <Link className='pe-1' to='/basket'><i className='fas fa-shopping-cart'> Cart ({itemCount}) </i> </Link>
-                        <Link className='pe-1' to="/login"><i className='fas fa-user'> Login </i> </Link>
-                        <Link to="/register"><i className='fas fa-user'> Register</i></Link>
+                        <Link className='pe-1' to='/basket'><i className='fas fa-shopping-cart'> ({itemCount}) </i> </Link>
+                        {
+                            user ? (<h2>{user.email}</h2>) : (
+                                <Container>
+                                    <Link className='pe-1' to="/login"><i className='fas fa-user'> Login </i> </Link>
+                                    <Link to="/register"><i className='fas fa-user'> Register </i></Link>
+                                </Container>
+                            )
+                        }
                     </Nav>
                 </Container>
             </Navbar>

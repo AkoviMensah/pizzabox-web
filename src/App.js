@@ -15,12 +15,18 @@ import agent from './app/api/agent';
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import { useDispatch } from 'react-redux';
 import { setBasket } from './pages/basket/basketSlice';
+import { fetchCurrentUser } from './pages/account/accountSlice';
 
 function App() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    try {
+      dispatch(fetchCurrentUser());
+    } catch (error) {
+      console.log(error);
+    }
     const buyerId = getCookie('buyerId');
     if (buyerId) {
       agent.Basket.get()
