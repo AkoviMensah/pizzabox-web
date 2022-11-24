@@ -9,34 +9,30 @@ import BasketPage from './pages/basket/BasketPage';
 import ContactPage from './pages/contact/ContactPage';
 import PizzaDetails from './pages/pizzas/PizzaDetails';
 import Pizzas from './pages/pizzas/Pizzas';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getCookie } from './app/util/util';
 import agent from './app/api/agent';
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import { useDispatch } from 'react-redux';
-import { setBasket } from './pages/basket/basketSlice';
+import { fetchBasketAsync, setBasket } from './pages/basket/basketSlice';
 import { fetchCurrentUser } from './pages/account/accountSlice';
 
 function App() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const initApp = useCallback(async () => {
     try {
-      dispatch(fetchCurrentUser());
+      await dispatch(fetchCurrentUser());
+      await dispatch(fetchBasketAsync());
     } catch (error) {
       console.log(error);
     }
-    const buyerId = getCookie('buyerId');
-    if (buyerId) {
-      agent.Basket.get()
-        .then((basket) => dispatch(setBasket(basket)))
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
   }, [dispatch]);
+
+  useEffect(() => {
+    initApp().then(() => setLoading(false));
+  }, [initApp]);
 
   if (loading) return <h1>loading ...</h1>;
 
