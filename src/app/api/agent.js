@@ -5,7 +5,7 @@ axios.defaults.baseURL = 'http://localhost:5000/api/';
 axios.defaults.withCredentials = true;
 
 const responseBody = (response) => response.data;
-const user = localStorage.getItem('user');
+const user = JSON.parse(localStorage.getItem('user'));
 if (user) {
   axios.interceptors.request.use((config) => {
     const token = user.token;

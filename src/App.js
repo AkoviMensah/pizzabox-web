@@ -10,11 +10,9 @@ import ContactPage from './pages/contact/ContactPage';
 import PizzaDetails from './pages/pizzas/PizzaDetails';
 import Pizzas from './pages/pizzas/Pizzas';
 import { useCallback, useEffect, useState } from 'react';
-import { getCookie } from './app/util/util';
-import agent from './app/api/agent';
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import { useDispatch } from 'react-redux';
-import { fetchBasketAsync, setBasket } from './pages/basket/basketSlice';
+import { fetchBasketAsync } from './pages/basket/basketSlice';
 import { fetchCurrentUser } from './pages/account/accountSlice';
 
 function App() {
