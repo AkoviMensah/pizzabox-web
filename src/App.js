@@ -14,6 +14,7 @@ import CheckoutPage from './pages/checkout/CheckoutPage';
 import { useDispatch } from 'react-redux';
 import { fetchBasketAsync } from './pages/basket/basketSlice';
 import { fetchCurrentUser } from './pages/account/accountSlice';
+import Orders from './pages/orders/Orders';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/basket' element={<BasketPage />} />
             <Route path='/checkout' element={<CheckoutPage />} />
+            <Route path='/orders' element={<Orders />} />
           </Routes>
         </Container>
       </main>
