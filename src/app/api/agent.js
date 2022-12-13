@@ -27,11 +27,11 @@ const Menu = {
 };
 
 const Basket = {
-  get: () => requests.get('Basket'),
+  get: () => requests.get('basket'),
   addItem: (pizzaId, quantity = 1) =>
-    requests.post(`Basket?pizzaId=${pizzaId}&quantity=${quantity}`, {}),
+    requests.post(`basket?pizzaId=${pizzaId}&quantity=${quantity}`, {}),
   removeItem: (pizzaId, quantity = 1) =>
-    requests.delete(`Basket?pizzaId=${pizzaId}&quantity=${quantity}`),
+    requests.delete(`basket?pizzaId=${pizzaId}&quantity=${quantity}`),
 };
 
 const Account = {

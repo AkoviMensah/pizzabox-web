@@ -2,7 +2,7 @@ import { Button, Menu, Fade, MenuItem } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signOut } from "../../features/account/accountSlice";
+import { signOut } from "../../pages/account/accountSlice";
 import { clearBasket } from "../../pages/basket/basketSlice";
 
 export default function SignedInMenu() {
@@ -20,7 +20,8 @@ export default function SignedInMenu() {
     return (
         <>
             <Button
-                color='inherit'
+                color='primary'
+                variant='contained'
                 onClick={handleClick}
                 sx={{ typography: 'h6' }}
             >

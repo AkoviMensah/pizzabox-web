@@ -1,7 +1,9 @@
+import { Button } from '@mui/material'
 import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import SignedInMenu from './SignedInMenu'
 
 const Header = () => {
     const { user } = useSelector(state => state.account);
@@ -17,9 +19,11 @@ const Header = () => {
                         <Link className='pe-1' to="/contact"><i className='fas'>Contact</i></Link>
                     </Nav>
                     <Nav className="ml-auto">
-                        <Link className='pe-1' to='/basket'><i className='fas fa-shopping-cart'> ({itemCount}) </i> </Link>
+                        <Button variant='contained' className='me-1'>
+                            <Link className='pe-1' to='/basket'><i className='fas fa-shopping-cart'> <sub>{itemCount}</sub> </i> </Link>
+                        </Button>
                         {
-                            user ? (<h2>{user.email}</h2>) : (
+                            user ? (<SignedInMenu />) : (
                                 <Container>
                                     <Link className='pe-1' to="/login"><i className='fas fa-user'> Login </i> </Link>
                                     <Link to="/register"><i className='fas fa-user'> Register </i></Link>

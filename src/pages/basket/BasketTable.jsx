@@ -13,7 +13,7 @@ export default function BasketTable({ items, isBasket = true }) {
             <Table sx={{ minWidth: 650 }}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Product</TableCell>
+                        <TableCell>Pizza</TableCell>
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="center">Quantity</TableCell>
                         <TableCell align="right">Subtotal</TableCell>
@@ -24,7 +24,7 @@ export default function BasketTable({ items, isBasket = true }) {
                 <TableBody>
                     {items.map(item => (
                         <TableRow
-                            key={item.productId}
+                            key={item.pizzaId}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
@@ -37,8 +37,8 @@ export default function BasketTable({ items, isBasket = true }) {
                             <TableCell align="center">
                                 {isBasket &&
                                     <LoadingButton
-                                        loading={status === 'pendingRemoveItem' + item.productId + 'rem'}
-                                        onClick={() => dispatch(removeBasketItemAsync({ productId: item.productId, quantity: 1, name: 'rem' }))}
+                                        loading={status === 'pendingRemoveItem' + item.pizzaId + 'rem'}
+                                        onClick={() => dispatch(removeBasketItemAsync({ pizzaId: item.pizzaId, quantity: 1, name: 'rem' }))}
                                         color='error'
                                     >
                                         <Remove />
@@ -46,8 +46,8 @@ export default function BasketTable({ items, isBasket = true }) {
                                 {item.quantity}
                                 {isBasket &&
                                     <LoadingButton
-                                        loading={status === 'pendingAddItem' + item.productId}
-                                        onClick={() => dispatch(addBasketItemAsync({ productId: item.productId }))}
+                                        loading={status === 'pendingAddItem' + item.pizzaId}
+                                        onClick={() => dispatch(addBasketItemAsync({ pizzaId: item.pizzaId }))}
                                         color='secondary'
                                     >
                                         <Add />
@@ -57,8 +57,8 @@ export default function BasketTable({ items, isBasket = true }) {
                             {isBasket &&
                                 <TableCell align="right">
                                     <LoadingButton
-                                        loading={status === 'pendingRemoveItem' + item.productId + 'del'}
-                                        onClick={() => dispatch(removeBasketItemAsync({ productId: item.productId, quantity: item.quantity, name: 'del' }))}
+                                        loading={status === 'pendingRemoveItem' + item.pizzaId + 'del'}
+                                        onClick={() => dispatch(removeBasketItemAsync({ pizzaId: item.pizzaId, quantity: item.quantity, name: 'del' }))}
                                         color='error'
                                     >
                                         <Delete />

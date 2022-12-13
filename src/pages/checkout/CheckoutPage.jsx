@@ -11,7 +11,7 @@ import { clearBasket } from "../basket/basketSlice";
 import { LoadingButton } from "@mui/lab";
 import { useDispatch } from "react-redux";
 
-const steps = ['Shipping address', 'Review your order', 'Payment details'];
+const steps = ['Address', 'Review your order', 'Payment details'];
 
 function getStepContent(step) {
     switch (step) {
