@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { fetchBasketAsync } from './pages/basket/basketSlice';
 import { fetchCurrentUser } from './pages/account/accountSlice';
 import Orders from './pages/orders/Orders';
+import Crust from './pages/custom-pizza/Crust';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function App() {
     <div>
       <Header />
       <main>
-        <Container>
+        <Container className='my-1'>
           <Routes>
             <Route path='/' element={<Pizzas />} />
             <Route path='/pizza/:id' element={<PizzaDetails />} />
@@ -50,6 +51,7 @@ function App() {
             <Route path='/basket' element={<BasketPage />} />
             <Route path='/checkout' element={<CheckoutPage />} />
             <Route path='/orders' element={<Orders />} />
+            <Route path='/crust' element={<Crust />} />
           </Routes>
         </Container>
       </main>
