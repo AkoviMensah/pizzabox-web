@@ -16,6 +16,7 @@ import { fetchBasketAsync } from './pages/basket/basketSlice';
 import { fetchCurrentUser } from './pages/account/accountSlice';
 import Orders from './pages/orders/Orders';
 import Crust from './pages/custom-pizza/Crust';
+import Size from './pages/custom-pizza/Size';
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
             <Route path='/checkout' element={<CheckoutPage />} />
             <Route path='/orders' element={<Orders />} />
             <Route path='/crust' element={<Crust />} />
+            <Route path='/size' element={<Size />} />
           </Routes>
         </Container>
       </main>

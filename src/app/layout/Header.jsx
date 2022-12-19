@@ -19,6 +19,9 @@ const Header = () => {
                         <Link className='pe-1' to="/contact"><i className='fas'>Contact</i></Link>
                     </Nav>
                     <Nav className="ml-auto">
+                        <Button variant='contained' color='secondary' className='me-1'>
+                            <Link className='pe-1' to='/crust'>Customize </Link>
+                        </Button>
                         <Button variant='contained' className='me-1'>
                             <Link className='pe-1' to='/basket'><i className='fas fa-shopping-cart'> <sub>{itemCount}</sub> </i> </Link>
                         </Button>

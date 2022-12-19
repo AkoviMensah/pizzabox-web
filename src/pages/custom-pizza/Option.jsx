@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom'
 import { currencyFormat } from '../../app/util/util'
 import { addBasketItemAsync } from '../basket/basketSlice'
 
-const Option = ({ item }) => {
+const Option = ({ item, next }) => {
     const { status } = useSelector(state => state.basket)
     const dispatch = useDispatch();
 
     return (
         <Card className='m-1'>
-            <Link to={`/crust`}>
+            <Link to={next}>
                 <CardMedia to={`/crust`}
                     sx={{ height: 200, backgroundSize: 'flex', bgcolor: 'primary.light' }}
                     image={item.image}
