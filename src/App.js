@@ -17,6 +17,7 @@ import { fetchCurrentUser } from './pages/account/accountSlice';
 import Orders from './pages/orders/Orders';
 import Crust from './pages/custom-pizza/Crust';
 import Size from './pages/custom-pizza/Size';
+import Toppings from './pages/custom-pizza/Toppings';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ function App() {
             <Route path='/orders' element={<Orders />} />
             <Route path='/crust' element={<Crust />} />
             <Route path='/size' element={<Size />} />
+            <Route path='/toppings' element={<Toppings />} />
           </Routes>
         </Container>
       </main>
